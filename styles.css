@@ -1,4 +1,4 @@
-/* Base styles */
+/* Enhanced styles.css */
 * {
   margin: 0;
   padding: 0;
@@ -17,6 +17,7 @@ body {
   margin: 0 auto;
   padding: 0 20px;
 }
+
 /* Header styles */
 header {
   background: linear-gradient(135deg, #1e3c72, #2a5298);
@@ -34,4 +35,133 @@ header h1 {
 header p {
   font-size: 1.1rem;
   opacity: 0.9;
+}
+
+/* Main content styles */
+main {
+  padding: 40px 0;
+}
+
+.search-container {
+  display: flex;
+  max-width: 600px;
+  margin: 0 auto 30px;
+}
+
+#country-input {
+  flex: 1;
+  padding: 12px 15px;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px 0 0 4px;
+  outline: none;
+}
+
+#search-btn {
+  padding: 12px 25px;
+  background-color: #2a5298;
+  color: white;
+  border: none;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+}
+
+#search-btn:hover {
+  background-color: #1e3c72;
+}
+
+/* Results container */
+#results-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.country-card {
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.country-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.flag-container {
+  height: 160px;
+  overflow: hidden;
+  position: relative;
+}
+
+.flag-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.country-info {
+  padding: 20px;
+}
+
+.country-name {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: #1e3c72;
+}
+
+.info-item {
+  margin-bottom: 8px;
+  display: flex;
+}
+
+.info-label {
+  font-weight: 500;
+  min-width: 120px;
+  color: #555;
+}
+
+.info-value {
+  flex: 1;
+}
+
+/* Footer styles */
+footer {
+  background-color: #2a5298;
+  color: white;
+  padding: 20px 0;
+  text-align: center;
+}
+
+footer a {
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 2rem;
+  }
+
+  #results-container {
+    grid-template-columns: 1fr;
+  }
+
+  .search-container {
+    flex-direction: column;
+  }
+
+  #country-input {
+    border-radius: 4px;
+    margin-bottom: 10px;
+  }
+
+  #search-btn {
+    border-radius: 4px;
+  }
 }
