@@ -62,24 +62,67 @@ async function fetchCountryData(countryName) {
 // Function to display results
 function displayResults(countries) {
   countries.forEach((country) => {
-    // Extract basic data
+    // Extract required data
     const name = country.name.common;
+    const officialName = country.name.official;
     const capital = country.capital ? country.capital.join(", ") : "N/A";
     const flagUrl = country.flags.svg;
-    
-    // Create a simple country card
+    const flagAlt = country.flags.alt || `Flag of ${name}`;
+
+    // Currency (can be multiple)
+    let currencyText = "N/A";
+    if (country.currencies) {
+      const currencyEntries = Object.entries(country.currencies);
+      if (currencyEntries.length > 0) {
+        currencyText = currencyEntries
+          .map(([code, currency]) => `${currency.name} (${currency.symbol || code})`)
+          .join(", ");
+      }
+    }
+
+    // Additional data points
+    const population = country.population.toLocaleString();
+    const region = country.region;
+    const languages = country.languages ? Object.values(country.languages).join(", ") : "N/A";
+    const area = country.area ? `${country.area.toLocaleString()} km²` : "N/A";
+
+    // Create country card with more information
     const countryCard = document.createElement("div");
     countryCard.className = "country-card";
 
     countryCard.innerHTML = `
       <div class="flag-container">
-        <img src="${flagUrl}" alt="Flag of ${name}">
+        <img src="${flagUrl}" alt="${flagAlt}">
       </div>
       <div class="country-info">
         <h2 class="country-name">${name}</h2>
         <div class="info-item">
+          <span class="info-label">Official Name:</span>
+          <span class="info-value">${officialName}</span>
+        </div>
+        <div class="info-item">
           <span class="info-label">Capital:</span>
           <span class="info-value">${capital}</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Currency:</span>
+          <span class="info-value">${currencyText}</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Population:</span>
+          <span class="info-value">${population}</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Region:</span>
+          <span class="info-value">${region}</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Languages:</span>
+          <span class="info-value">${languages}</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Area:</span>
+          <span class="info-value">${area}</span>
         </div>
       </div>
     `;
